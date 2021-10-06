@@ -6,10 +6,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients
 @SpringBootApplication
-public class SellicsApplication {
+public class AmazonKeywordScoreApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SellicsApplication.class, args);
+        SpringApplication.run(AmazonKeywordScoreApplication.class, args);
     }
 
 }
