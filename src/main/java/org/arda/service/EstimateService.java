@@ -38,8 +38,6 @@ public class EstimateService {
             List<String> suggestedPhrases = extractSuggestedPhrases(suggestionResponse);
             totalSuggestedPhrases += suggestedPhrases.size();
 
-            System.out.println(totalSuggestedPhrases);
-
             // Iterates the suggested phrases and counts which match the initial keyword.
             for(String phrase : suggestedPhrases){
                 Pattern pattern = Pattern.compile(String.format(".*\\b%s\\b.*", lowerCaseKeyword));
@@ -48,14 +46,12 @@ public class EstimateService {
                     matchingPhrases++;
                 }
             }
-            System.out.println(matchingPhrases);
         }
 
         int score = 0;
         if(totalSuggestedPhrases != 0){
             score = matchingPhrases * 100 / totalSuggestedPhrases;
         }
-
         return EstimateResponse.builder()
                 .keyword(keyword)
                 .score(score)
@@ -71,9 +67,7 @@ public class EstimateService {
     private static List<String> extractSuggestedPhrases(String suggestionResponse){
         suggestionResponse = suggestionResponse.substring(1, suggestionResponse.length() - 2);
         suggestionResponse =  suggestionResponse.substring( suggestionResponse.indexOf("[") + 1 , suggestionResponse.indexOf("]") );
-        List<String> suggestedPhrases = Arrays.asList(suggestionResponse.replaceAll("\"","").split(","));
-        System.out.println(suggestedPhrases);
-        return suggestedPhrases;
+        return Arrays.asList(suggestionResponse.replace("\"","").split(","));
     }
 
 }
